@@ -3,9 +3,10 @@
     public class Response
     {
         public int Id { get; set; }
-        public int ParticipantId { get; set; }
         public int QuestionId { get; set; }
+        public Question Question { get; set; }
+        
         public required string Answer {  get; set; }
-        public bool? IsCorrect { get; set; }
+        public int UserId { get; set; }
     }
 }

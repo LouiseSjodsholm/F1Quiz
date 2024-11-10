@@ -20,6 +20,16 @@ namespace F1Quiz.Repositories
 
         public async Task DeleteEventAsync(int id)
         {
+            //Delete responses associated with questions for this event
+            var questions = _context.Questions.Where(q=>q.EventId==id).ToList();
+            foreach (var question in questions)
+            {
+                var responses = _context.Responses.Where(r => r.QuestionId == question.Id);
+                _context.Responses.RemoveRange(responses);
+            }
+            _context.Questions.RemoveRange(questions);
+
+            //Delete event
             var race = await _context.Events.FindAsync(id);
             if (race != null) 
             {
@@ -36,6 +46,14 @@ namespace F1Quiz.Repositories
         public async Task<Event?> GetEventByIdAsync(int id)
         {
             return await _context.Events.FindAsync(id); //return null if no matches
+        }
+
+        public async Task<Event?> GetUpcomingEventAsync(DateTime currentDateTime)
+        {
+            return await _context.Events
+                .Where(e=>e.RaceDateTime > currentDateTime)
+                .OrderBy(e=>e.RaceDateTime)
+                .FirstOrDefaultAsync();
         }
 
         public async Task UpdateEventAsync(Event race)

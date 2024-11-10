@@ -13,6 +13,7 @@ builder.Services.AddDbContext<QuizContext>(options =>
 //Add repositories for dependency injection
 builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
 builder.Services.AddScoped<IEventRepository, EventRepository>();
+builder.Services.AddScoped<IResponseRepository, ResponseRepository>();
 
 
 // Add services to the container.

@@ -18,40 +18,13 @@ namespace F1Quiz.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RaceDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    RaceName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    RaceName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Events", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Participants",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Participants", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Responses",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ParticipantId = table.Column<int>(type: "int", nullable: false),
-                    QuestionId = table.Column<int>(type: "int", nullable: false),
-                    Answer = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsCorrect = table.Column<bool>(type: "bit", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Responses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -82,7 +55,6 @@ namespace F1Quiz.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ParticipantId = table.Column<int>(type: "int", nullable: false),
                     EventId = table.Column<int>(type: "int", nullable: false),
                     Points = table.Column<int>(type: "int", nullable: false)
                 },
@@ -95,12 +67,26 @@ namespace F1Quiz.Migrations
                         principalTable: "Events",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Responses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    QuestionId = table.Column<int>(type: "int", nullable: false),
+                    Answer = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Responses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Scores_Participants_ParticipantId",
-                        column: x => x.ParticipantId,
-                        principalTable: "Participants",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_Responses_Questions_QuestionId",
+                        column: x => x.QuestionId,
+                        principalTable: "Questions",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -109,22 +95,19 @@ namespace F1Quiz.Migrations
                 column: "EventId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Responses_QuestionId",
+                table: "Responses",
+                column: "QuestionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Scores_EventId",
                 table: "Scores",
                 column: "EventId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Scores_ParticipantId",
-                table: "Scores",
-                column: "ParticipantId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Questions");
-
             migrationBuilder.DropTable(
                 name: "Responses");
 
@@ -132,10 +115,10 @@ namespace F1Quiz.Migrations
                 name: "Scores");
 
             migrationBuilder.DropTable(
-                name: "Events");
+                name: "Questions");
 
             migrationBuilder.DropTable(
-                name: "Participants");
+                name: "Events");
         }
     }
 }

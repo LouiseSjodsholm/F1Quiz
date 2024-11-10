@@ -24,6 +24,7 @@ namespace F1Quiz.Models.ViewModels
     {
         [Required(ErrorMessage ="Question text is required.")]
         public string Text { get; set; }
-        public string AnswerType { get; set; } = "text"; //defaults to test unless otherwise specified during creation.
+        public string AnswerType { get; set; } = "text"; //defaults to text unless otherwise specified during creation.
+        public string? Options { get; set; } //Multiple choice options
     }
 }

@@ -5,14 +5,14 @@
 namespace F1Quiz.Migrations
 {
     /// <inheritdoc />
-    public partial class AddImagePathToEvent : Migration
+    public partial class AddOptionsToQuestion : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "ImagePath",
-                table: "Events",
+                name: "Options",
+                table: "Questions",
                 type: "nvarchar(max)",
                 nullable: true);
         }
@@ -21,8 +21,8 @@ namespace F1Quiz.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "ImagePath",
-                table: "Events");
+                name: "Options",
+                table: "Questions");
         }
     }
 }

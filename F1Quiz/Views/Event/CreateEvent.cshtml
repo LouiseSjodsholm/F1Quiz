@@ -39,9 +39,20 @@
                 <input asp-for="Questions[i].Text" class="form-control" placeholder="Enter question text" required />
                 <span asp-validation-for="Questions[i].Text" class="text-danger"></span>
 
-                <label asp-for="Questions[i].AnswerType" class="form-label fw-bold">Data type</label>
-                <input asp-for="Questions[i].AnswerType" class="form-control" placeholder="Enter question type" required />
+                <label asp-for="Questions[i].AnswerType" class="form-label fw-bold">Answer Type</label>
+                <select asp-for="Questions[i].AnswerType" class="form-select question-type" data-index="@i">
+                    <option value="text">Text</option>
+                    <option value="number">Number</option>
+                    <option value="mcq">Multiple Choice</option>
+                </select>
                 <span asp-validation-for="Questions[i].AnswerType" class="text-danger"></span>
+
+                <!-- Multiple Choice Options (only shown if 'Multiple Choice' is selected) -->
+                <div class="mt-2 options-field" id="optionsField-@i" style="display: none;">
+                    <label asp-for="Questions[i].Options" class="form-label fw-bold">Options (comma-separated)</label>
+                    <input asp-for="Questions[i].Options" class="form-control" placeholder="Enter options separated by commas (e.g., Option1, Option2)" />
+                    <span asp-validation-for="Questions[i].Options" class="text-danger"></span>
+                </div>
             </div>
 
             if (i < Model.Questions.Count - 1)
@@ -55,3 +66,35 @@
     <!-- Submit Button -->
     <button type="submit" class="btn btn-primary mt-3">Save Event and Questions</button>
 </form>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Event listener for all dropdowns with the class 'question-type'
+            $('.question-type').on('change', function () {
+                var selectedValue = $(this).val();
+                var index = $(this).data('index');
+                var optionsField = $('#optionsField-' + index);
+
+                // Show or hide the options field based on the selected value
+                if (selectedValue === 'mcq') {
+                    optionsField.show();
+                } else {
+                    optionsField.hide();
+                }
+            });
+
+            // Initial check in case the form reloads with "Multiple Choice" selected
+            $('.question-type').each(function () {
+                var selectedValue = $(this).val();
+                var index = $(this).data('index');
+                var optionsField = $('#optionsField-' + index);
+
+                if (selectedValue === 'mcq') {
+                    optionsField.show();
+                }
+            });
+        });
+    </script>
+}
+

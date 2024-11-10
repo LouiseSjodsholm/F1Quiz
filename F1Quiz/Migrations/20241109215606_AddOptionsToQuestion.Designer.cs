@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace F1Quiz.Migrations
 {
     [DbContext(typeof(QuizContext))]
-    [Migration("20241106203905_AddEventDescription")]
-    partial class AddEventDescription
+    [Migration("20241109215606_AddOptionsToQuestion")]
+    partial class AddOptionsToQuestion
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,6 +33,13 @@ namespace F1Quiz.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("RaceDateTime")
                         .HasColumnType("datetime2");
 
@@ -43,23 +50,6 @@ namespace F1Quiz.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Events");
-                });
-
-            modelBuilder.Entity("F1Quiz.Models.Participant", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Participants");
                 });
 
             modelBuilder.Entity("F1Quiz.Models.Question", b =>
@@ -79,6 +69,9 @@ namespace F1Quiz.Migrations
 
                     b.Property<int>("EventId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Options")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("QuestionText")
                         .IsRequired()
@@ -103,16 +96,15 @@ namespace F1Quiz.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("IsCorrect")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ParticipantId")
-                        .HasColumnType("int");
-
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
 
                     b.ToTable("Responses");
                 });
@@ -128,17 +120,12 @@ namespace F1Quiz.Migrations
                     b.Property<int>("EventId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ParticipantId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Points")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EventId");
-
-                    b.HasIndex("ParticipantId");
 
                     b.ToTable("Scores");
                 });
@@ -154,6 +141,17 @@ namespace F1Quiz.Migrations
                     b.Navigation("Event");
                 });
 
+            modelBuilder.Entity("F1Quiz.Models.Response", b =>
+                {
+                    b.HasOne("F1Quiz.Models.Question", "Question")
+                        .WithMany()
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Question");
+                });
+
             modelBuilder.Entity("F1Quiz.Models.Score", b =>
                 {
                     b.HasOne("F1Quiz.Models.Event", "Event")
@@ -162,15 +160,7 @@ namespace F1Quiz.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("F1Quiz.Models.Participant", "Participant")
-                        .WithMany()
-                        .HasForeignKey("ParticipantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Event");
-
-                    b.Navigation("Participant");
                 });
 
             modelBuilder.Entity("F1Quiz.Models.Event", b =>

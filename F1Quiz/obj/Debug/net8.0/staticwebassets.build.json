@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "MbSClfkk2XUkZBplLzbJN5o4eAdbPiIGQ6zKGg/erFo=",
+  "Hash": "Kt62/ekYBq8q5iNFVfGQ4xe0hhkyu7ES5XAf6MPCm+4=",
   "Source": "F1Quiz",
   "BasePath": "_content/F1Quiz",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\353053b8-f9b2-484b-92d1-2a0add8d0629_text2.png",
+      "SourceId": "F1Quiz",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\",
+      "BasePath": "_content/F1Quiz",
+      "RelativePath": "images/353053b8-f9b2-484b-92d1-2a0add8d0629_text2.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\353053b8-f9b2-484b-92d1-2a0add8d0629_text2.png"
     },
     {
       "Identity": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\648a7c13-2787-43fc-9def-0323e4b9eac8_text2.png",

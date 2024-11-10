@@ -18,6 +18,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\louis\source\repos\F1Quiz\F1Quiz
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/louis/source/repos/F1Quiz/F1Quiz/Views/Event/AnswerQuestions.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRcQW5zd2VyUXVlc3Rpb25zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/louis/source/repos/F1Quiz/F1Quiz/Views/Event/CreateEvent.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRcQ3JlYXRlRXZlbnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

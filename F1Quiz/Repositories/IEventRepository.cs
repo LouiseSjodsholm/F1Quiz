@@ -4,6 +4,7 @@ namespace F1Quiz.Repositories
 {
     public interface IEventRepository
     {
+        Task<Event?> GetUpcomingEventAsync(DateTime currentDateTime);
         Task<IEnumerable<Event>> GetAllEventsAsync();
         Task<Event?> GetEventByIdAsync(int id);
         Task AddEventAsync(Event race);

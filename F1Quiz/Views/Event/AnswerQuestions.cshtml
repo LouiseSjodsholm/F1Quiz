@@ -1,0 +1,64 @@
+﻿@model F1Quiz.Models.ViewModels.AnswerQuestionsViewModel
+
+@if (ViewData["ErrorMessage"] != null) //There's no upcoming event
+{
+    <div class="alert alert-danger">
+        @ViewData["ErrorMessage"]
+    </div>
+}
+else
+{
+    <h2>@Model.EventName</h2>
+    @if (!string.IsNullOrEmpty(Model.ImagePath))
+    {
+        <img src="~/@Model.ImagePath" alt="Event Image" class="img-fluid my-3" />
+    }
+    <p>@Model.Description</p>
+
+    @if (Model.RaceDateTime > DateTime.Now)
+    {
+        <h3>Answer the Questions</h3>
+        <form asp-action="AnswerQuestions" method="post">
+            <input type="hidden" asp-for="EventId" />
+
+            @foreach (var question in Model.Questions)
+            {
+                <div class="mb-3">
+                    <label class="form-label fw-bold">@question.QuestionText</label>
+
+                    @if (question.AnswerType == "text")
+                    {
+                        <!-- Text Input -->
+                        <input type="text" asp-for="Questions[@question.QuestionId].Response" class="form-control" />
+                    }
+                    else if (question.AnswerType == "number")
+                    {
+                        <!-- Number Input -->
+                        <input type="number" asp-for="Questions[@question.QuestionId].Response" class="form-control" />
+                    }
+                    else if (question.AnswerType == "multiple-choice" && question.Options != null)
+                    {
+                        <!-- Multiple-Choice Dropdown -->
+                        <select asp-for="Questions[@question.QuestionId].Response" class="form-control">
+                            <option value="">Select an answer</option>
+                            @foreach (var option in question.Options)
+                            {
+                                <option value="@option">@option</option>
+                            }
+                        </select>
+                    }
+
+                    <span asp-validation-for="Questions[@question.QuestionId].Response" class="text-danger"></span>
+                </div>
+            }
+
+            <button type="submit" class="btn btn-primary">Submit Answers</button>
+        </form>
+    }
+    else
+    {
+        <p class="text-danger">This event has ended. Please check back for the next event!</p>
+        //Add button to go to result page.
+    }
+}
+

@@ -42,12 +42,17 @@ namespace F1Quiz.Repositories
 
         public async Task DeleteQuestionAsync(int id)
         {
+            //Delete related responses
+            var responses = _context.Responses.Where(r => r.QuestionId == id);
+            _context.Responses.RemoveRange(responses);
+
+            //Delete question
             var question = await _context.Questions.FindAsync(id);
             if (question != null)
             {
                 _context.Questions.Remove(question);
-                await _context.SaveChangesAsync();
             }
+            await _context.SaveChangesAsync();
         }
     }
 }
