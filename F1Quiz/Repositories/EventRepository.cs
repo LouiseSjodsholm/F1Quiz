@@ -12,10 +12,11 @@ namespace F1Quiz.Repositories
         {
             _context = context; //DbContext
         }
-        public async Task AddEventAsync(Event race)
+        public async Task<bool> AddEventAsync(Event race)
         {
             _context.Events.Add(race);
-            await _context.SaveChangesAsync();
+            int addedRows = await _context.SaveChangesAsync();
+            return addedRows > 0;
         }
 
         public async Task DeleteEventAsync(int id)
@@ -53,6 +54,7 @@ namespace F1Quiz.Repositories
             return await _context.Events
                 .Where(e=>e.RaceDateTime > currentDateTime)
                 .OrderBy(e=>e.RaceDateTime)
+                .Include(e => e.Questions)
                 .FirstOrDefaultAsync();
         }
 

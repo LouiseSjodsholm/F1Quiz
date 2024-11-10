@@ -76,8 +76,12 @@ namespace F1Quiz.Controllers
                                  }).ToList()
             };
 
-            await _eventRepository.AddEventAsync(newEvent);
-            return RedirectToAction("Index", "Home");
+            bool isSaved = await _eventRepository.AddEventAsync(newEvent);
+            if (isSaved)
+                ViewData["SuccessMessage"] = "Race added, it is now open for responses.";
+            else
+                ViewData["ErrorMessage"] = "There was an issue with saving your race event, please try again.";
+            return View();
         }
 
         [HttpGet]
@@ -103,7 +107,7 @@ namespace F1Quiz.Controllers
                     QuestionId = q.Id,
                     QuestionText = q.QuestionText,
                     AnswerType = q.AnswerType,
-                    //Options = q.AnswerType == "multiple-choice" ? q.Options.Split(',').ToList() : null //Options are comma-separated
+                    Options = q.AnswerType == "mcq" ? q.Options : null
                 }).ToList()
             };
 
@@ -111,19 +115,27 @@ namespace F1Quiz.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AnswerQuestions(int eventId, Dictionary<int, string> responses)
+        public async Task<IActionResult> AnswerQuestions(AnswerQuestionsViewModel responses)
         {
-            var raceRespondedTo = await _eventRepository.GetEventByIdAsync(eventId);
+            var raceRespondedTo = await _eventRepository.GetEventByIdAsync(responses.EventId);
             if (raceRespondedTo == null || raceRespondedTo.RaceDateTime <= DateTime.Now)
-                return View(raceRespondedTo);
-
-            var responseList = responses.Select(r=> new Response
             {
-                QuestionId = r.Key,
-                Answer = r.Value //Remeber to add which user
+                ViewData["ErrorMessage"] = "The event has ended.";
+                return View();
+            }
+                
+
+            var responseList = responses.Questions.Select(r=> new Response
+            {
+                QuestionId = r.QuestionId,
+                Answer = r.Response //Remember to add which user
             }).ToList();
-            await _responseRepository.AddResponseAsync(responseList);
-            return RedirectToAction("Thank you for your response!");
+            bool isSaved = await _responseRepository.AddResponseAsync(responseList);
+            if (isSaved)
+                ViewData["SuccessMessage"] = "Tak for dit svar!";
+            else
+                ViewData["ErrorMessage"] = "Der var et problem med at gemme dit svar, prøv igen.";
+            return View();
         }
     }
 }

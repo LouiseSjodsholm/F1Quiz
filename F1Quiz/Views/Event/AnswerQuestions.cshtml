@@ -1,64 +1,68 @@
 ﻿@model F1Quiz.Models.ViewModels.AnswerQuestionsViewModel
 
-@if (ViewData["ErrorMessage"] != null) //There's no upcoming event
+@if (ViewData["ErrorMessage"] != null)
 {
     <div class="alert alert-danger">
         @ViewData["ErrorMessage"]
     </div>
 }
+else if (ViewData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @ViewData["SuccessMessage"]
+    </div>
+}
 else
 {
     <h2>@Model.EventName</h2>
+
     @if (!string.IsNullOrEmpty(Model.ImagePath))
     {
         <img src="~/@Model.ImagePath" alt="Event Image" class="img-fluid my-3" />
     }
+
     <p>@Model.Description</p>
 
     @if (Model.RaceDateTime > DateTime.Now)
     {
         <h3>Answer the Questions</h3>
         <form asp-action="AnswerQuestions" method="post">
-            <input type="hidden" asp-for="EventId" />
-
-            @foreach (var question in Model.Questions)
+            <input type="hidden" asp-for="EventId" /> <!-- Ensure EventId binds correctly -->
+            @for (var i = 0; i < Model.Questions.Count; i++)
             {
                 <div class="mb-3">
-                    <label class="form-label fw-bold">@question.QuestionText</label>
+                    <label class="form-label fw-bold">@Model.Questions[i].QuestionText</label>
 
-                    @if (question.AnswerType == "text")
+                    @if (Model.Questions[i].AnswerType == "text")
                     {
                         <!-- Text Input -->
-                        <input type="text" asp-for="Questions[@question.QuestionId].Response" class="form-control" />
+                        <input type="text" name="Questions[@i].Response" class="form-control" />
                     }
-                    else if (question.AnswerType == "number")
+                    else if (Model.Questions[i].AnswerType == "number")
                     {
                         <!-- Number Input -->
-                        <input type="number" asp-for="Questions[@question.QuestionId].Response" class="form-control" />
+                        <input type="number" name="Questions[@i].Response" class="form-control" />
                     }
-                    else if (question.AnswerType == "multiple-choice" && question.Options != null)
+                    else if (Model.Questions[i].AnswerType == "mcq" && Model.Questions[i].Options != null)
                     {
                         <!-- Multiple-Choice Dropdown -->
-                        <select asp-for="Questions[@question.QuestionId].Response" class="form-control">
+                        <select name="Questions[@i].Response" class="form-control">
                             <option value="">Select an answer</option>
-                            @foreach (var option in question.Options)
+                            @foreach (var option in Model.Questions[i].Options)
                             {
                                 <option value="@option">@option</option>
                             }
                         </select>
                     }
 
-                    <span asp-validation-for="Questions[@question.QuestionId].Response" class="text-danger"></span>
+                    <!-- Hidden input to maintain QuestionId -->
+                    <input type="hidden" name="Questions[@i].QuestionId" value="@Model.Questions[i].QuestionId" />
+
+                    <span asp-validation-for="Questions[@i].Response" class="text-danger"></span>
                 </div>
             }
 
             <button type="submit" class="btn btn-primary">Submit Answers</button>
         </form>
     }
-    else
-    {
-        <p class="text-danger">This event has ended. Please check back for the next event!</p>
-        //Add button to go to result page.
-    }
 }
-

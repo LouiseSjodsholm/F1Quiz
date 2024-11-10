@@ -1,71 +1,86 @@
 ﻿@using F1Quiz.Models.ViewModels
 @model EventWithQuestionsViewModel
 
-<h2>Create Event</h2>
-
-<form asp-action="CreateEvent" method="post" enctype="multipart/form-data" class="container mt-4">
-    <!-- Event Details Section -->
-    <div class="mb-3">
-        <label asp-for="Name" class="form-label fw-bold">Event Name</label>
-        <input asp-for="Name" class="form-control" placeholder="Enter event name" required />
-        <span asp-validation-for="Name" class="text-danger"></span>
+@if (ViewData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @ViewData["ErrorMessage"]
     </div>
-
-    <div class="mb-3">
-        <label asp-for="DateTime" class="form-label fw-bold">Event Date and Time</label>
-        <input asp-for="DateTime" type="datetime-local" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-ddT12:00")" required />
-        <span asp-validation-for="DateTime" class="text-danger"></span>
+}
+@if (ViewData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @ViewData["SuccessMessage"]
     </div>
+}
+else
+{
+    <h2>Create Event</h2>
 
-    <div class="mb-3">
-        <label asp-for="Description" class="form-label fw-bold">Description</label>
-        <textarea asp-for="Description" class="form-control" rows="3" placeholder="Enter event description"></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
+    <form asp-action="CreateEvent" method="post" enctype="multipart/form-data" class="container mt-4">
+        <!-- Event Details Section -->
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label fw-bold">Event Name</label>
+            <input asp-for="Name" class="form-control" placeholder="Enter event name" required />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
 
-    <!-- Image Upload Section -->
-    <div class="mb-3">
-        <label asp-for="ImageFile" class="form-label fw-bold">Upload Event Image</label>
-        <input asp-for="ImageFile" type="file" class="form-control" />
-    </div>
+        <div class="mb-3">
+            <label asp-for="DateTime" class="form-label fw-bold">Event Date and Time</label>
+            <input asp-for="DateTime" type="datetime-local" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-ddT12:00")" required />
+            <span asp-validation-for="DateTime" class="text-danger"></span>
+        </div>
 
-    <!-- Questions Section -->
-    <h4>Add Questions</h4>
-    <div id="questions">
-        @for (var i = 0; i < Model.Questions.Count; i++)
-        {
-            <div class="mb-3">
-                <label asp-for="Questions[i].Text" class="form-label fw-bold">Question @(i + 1)</label>
-                <input asp-for="Questions[i].Text" class="form-control" placeholder="Enter question text" required />
-                <span asp-validation-for="Questions[i].Text" class="text-danger"></span>
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label fw-bold">Description</label>
+            <textarea asp-for="Description" class="form-control" rows="3" placeholder="Enter event description"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
 
-                <label asp-for="Questions[i].AnswerType" class="form-label fw-bold">Answer Type</label>
-                <select asp-for="Questions[i].AnswerType" class="form-select question-type" data-index="@i">
-                    <option value="text">Text</option>
-                    <option value="number">Number</option>
-                    <option value="mcq">Multiple Choice</option>
-                </select>
-                <span asp-validation-for="Questions[i].AnswerType" class="text-danger"></span>
+        <!-- Image Upload Section -->
+        <div class="mb-3">
+            <label asp-for="ImageFile" class="form-label fw-bold">Upload Event Image</label>
+            <input asp-for="ImageFile" type="file" class="form-control" />
+        </div>
 
-                <!-- Multiple Choice Options (only shown if 'Multiple Choice' is selected) -->
-                <div class="mt-2 options-field" id="optionsField-@i" style="display: none;">
-                    <label asp-for="Questions[i].Options" class="form-label fw-bold">Options (comma-separated)</label>
-                    <input asp-for="Questions[i].Options" class="form-control" placeholder="Enter options separated by commas (e.g., Option1, Option2)" />
-                    <span asp-validation-for="Questions[i].Options" class="text-danger"></span>
-                </div>
-            </div>
-
-            if (i < Model.Questions.Count - 1)
+        <!-- Questions Section -->
+        <h4>Add Questions</h4>
+        <div id="questions">
+            @for (var i = 0; i < Model.Questions.Count; i++)
             {
-                <hr style="border-top: 1px solid #ddd;" />
-                //styling purposes
-            }
-        }
-    </div>
+                <div class="mb-3">
+                    <label asp-for="Questions[i].Text" class="form-label fw-bold">Question @(i + 1)</label>
+                    <input asp-for="Questions[i].Text" class="form-control" placeholder="Enter question text" required />
+                    <span asp-validation-for="Questions[i].Text" class="text-danger"></span>
 
-    <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary mt-3">Save Event and Questions</button>
-</form>
+                    <label asp-for="Questions[i].AnswerType" class="form-label fw-bold">Answer Type</label>
+                    <select asp-for="Questions[i].AnswerType" class="form-select question-type" data-index="@i">
+                        <option value="text">Text</option>
+                        <option value="number">Number</option>
+                        <option value="mcq">Multiple Choice</option>
+                    </select>
+                    <span asp-validation-for="Questions[i].AnswerType" class="text-danger"></span>
+
+                    <!-- Multiple Choice Options (only shown if 'Multiple Choice' is selected) -->
+                    <div class="mt-2 options-field" id="optionsField-@i" style="display: none;">
+                        <label asp-for="Questions[i].Options" class="form-label fw-bold">Options (comma-separated)</label>
+                        <input asp-for="Questions[i].Options" class="form-control" placeholder="Enter options separated by commas (e.g., Option1, Option2)" />
+                        <span asp-validation-for="Questions[i].Options" class="text-danger"></span>
+                    </div>
+                </div>
+
+                if (i < Model.Questions.Count - 1)
+                {
+                    <hr style="border-top: 1px solid #ddd;" />
+                    //styling purposes
+                }
+            }
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary mt-3">Save Event and Questions</button>
+    </form>
+}
 
 @section Scripts {
     <script>

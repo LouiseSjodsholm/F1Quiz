@@ -11,10 +11,11 @@ namespace F1Quiz.Repositories
         {
             _context = context;
         }
-        public async Task AddResponseAsync(List<Response> responses)
+        public async Task<bool> AddResponseAsync(List<Response> responses)
         {
             _context.Responses.AddRange(responses);
-            await _context.SaveChangesAsync();
+            int addedRows = await _context.SaveChangesAsync();
+            return addedRows > 0;
         }
 
         public async Task<List<Response>> GetAllResponsesAsync()
