@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using F1Quiz.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace F1Quiz.Models.ViewModels
 {
@@ -21,5 +22,7 @@ namespace F1Quiz.Models.ViewModels
         [Required(ErrorMessage = "Please answer question")]
         public string Response { get; set; } //User input
         public List<string>? Options { get; set; } //Options for multiple choice questions
+        public bool IsAllDriverType => AnswerType == "allDriver";
+        public List<DriverOption> DriverOptions { get; set; }
     }
 }

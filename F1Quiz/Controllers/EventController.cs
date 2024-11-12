@@ -1,4 +1,5 @@
-﻿using F1Quiz.Models;
+﻿using F1Quiz.Data;
+using F1Quiz.Models;
 using F1Quiz.Models.ViewModels;
 using F1Quiz.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -60,6 +61,7 @@ namespace F1Quiz.Controllers
                 imagePath = Path.Combine("images", uniqueFileName).Replace("\\", "/"); //relative path
             }
             
+            //create event instance
             var newEvent = new Event
             {
                 RaceName = model.Name,
@@ -72,10 +74,12 @@ namespace F1Quiz.Controllers
                                  { 
                                      QuestionText = q.Text, 
                                      AnswerType = q.AnswerType, 
-                                     Options = q.AnswerType == "mcq" ? q.Options?.Split(',').Select(o => o.Trim()).ToList() : null
+                                     Options = q.AnswerType == "mcq" ? q.Options?.Split(',').Select(o => o.Trim()).ToList() : null,
+                                     DriverOptions = q.AnswerType == "allDriver" ? PredefinedOptions.AllDrivers : null
                                  }).ToList()
             };
 
+            //save
             bool isSaved = await _eventRepository.AddEventAsync(newEvent);
             if (isSaved)
                 ViewData["SuccessMessage"] = "Race added, it is now open for responses.";
@@ -107,7 +111,8 @@ namespace F1Quiz.Controllers
                     QuestionId = q.Id,
                     QuestionText = q.QuestionText,
                     AnswerType = q.AnswerType,
-                    Options = q.AnswerType == "mcq" ? q.Options : null
+                    Options = q.AnswerType == "mcq" ? q.Options : null,
+                    DriverOptions = q.AnswerType=="allDriver" ? PredefinedOptions.AllDrivers : null
                 }).ToList()
             };
 

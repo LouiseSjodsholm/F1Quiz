@@ -1,5 +1,9 @@
 ﻿@model F1Quiz.Models.ViewModels.AnswerQuestionsViewModel
 
+@{
+    Layout = "_Layout";
+}
+
 @if (ViewData["ErrorMessage"] != null)
 {
     <div class="alert alert-danger">
@@ -33,26 +37,41 @@ else
                 <div class="mb-3">
                     <label class="form-label fw-bold">@Model.Questions[i].QuestionText</label>
 
-                    @if (Model.Questions[i].AnswerType == "text")
+                    @switch(Model.Questions[i].AnswerType)
                     {
-                        <!-- Text Input -->
-                        <input type="text" name="Questions[@i].Response" class="form-control" />
-                    }
-                    else if (Model.Questions[i].AnswerType == "number")
-                    {
-                        <!-- Number Input -->
-                        <input type="number" name="Questions[@i].Response" class="form-control" />
-                    }
-                    else if (Model.Questions[i].AnswerType == "mcq" && Model.Questions[i].Options != null)
-                    {
-                        <!-- Multiple-Choice Dropdown -->
-                        <select name="Questions[@i].Response" class="form-control">
-                            <option value="">Select an answer</option>
-                            @foreach (var option in Model.Questions[i].Options)
-                            {
-                                <option value="@option">@option</option>
-                            }
-                        </select>
+                        case "text":
+                            <input type="text" name="Questions[@i].Response" class="form-control" />
+                            break;
+                        case "number":
+                            <input type="number" name="Questions[@i].Response" class="form-control" />
+                            break;
+                        case "mcq" when Model.Questions[i].Options != null:
+                            <select name="Questions[@i].Response" class="form-control">
+                                <option value="">Select an answer</option>
+                                @foreach (var option in Model.Questions[i].Options)
+                                {
+                                    <option value="@option">@option</option>
+                                }
+                            </select>
+                            break;
+                        case "allDriver":
+                            <div class="row row-cols-2 row-cols-md-5 g-2">
+                                @foreach (var driver in Model.Questions[i].DriverOptions)
+                                {
+                                    <div class="col">
+                                        <div class="driver-card text-center" onclick="selectCard(this, @i)">
+                                            <label>
+                                                <input type="radio" name="Questions[@i].Response" value="@driver.Name" class="d-none" required />
+                                                <img src="@driver.ImagePath" alt="@driver.Name" class="driver-image" />
+                                                <div class="card-body">
+                                                    <p class="card-text">@driver.Name</p>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            break;
                     }
 
                     <!-- Hidden input to maintain QuestionId -->
@@ -65,4 +84,22 @@ else
             <button type="submit" class="btn btn-primary">Submit Answers</button>
         </form>
     }
+}
+
+@section Scripts {
+    <script>
+        function selectCard(card, questionIndex) {
+            // Convert `card` to a jQuery object
+            var $card = $(card);
+
+            // Deselect all cards for this question
+            $(`[name="Questions[${questionIndex}].Response"]`).closest('.driver-card').removeClass('selected');
+
+            // Mark this card as selected
+            $card.addClass('selected');
+
+            // Check the associated radio button to register the answer
+            $card.find('input[type="radio"]').prop('checked', true);
+        }
+    </script>
 }

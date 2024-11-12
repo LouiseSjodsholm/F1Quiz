@@ -16,6 +16,10 @@ namespace F1Quiz.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Question>()
+                .Property(q => q.DriverOptionsJson)
+                .HasColumnType("nvarchar(max)");
+
             //Event - Question cascade delete
             modelBuilder.Entity<Question>()
                 .HasOne(q => q.Event)

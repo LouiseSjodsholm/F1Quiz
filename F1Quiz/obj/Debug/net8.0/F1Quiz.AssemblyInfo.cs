@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("g")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("F1Quiz")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+24e31e5908ed3b2d35d430d36dcd66fb4378d460")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dbc7cecd2aca0d2a9d4867699c029a74c29167e7")]
 [assembly: System.Reflection.AssemblyProductAttribute("F1Quiz")]
 [assembly: System.Reflection.AssemblyTitleAttribute("F1Quiz")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

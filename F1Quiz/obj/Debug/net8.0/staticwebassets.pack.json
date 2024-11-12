@@ -5,12 +5,20 @@
       "PackagePath": "staticwebassets\\F1Quiz.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\css\\custom-css.css",
+      "PackagePath": "staticwebassets\\css\\custom-css.css"
+    },
+    {
       "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\0b58cf23-b6ab-4d92-a945-8752aaccd10e_text2.png",
+      "PackagePath": "staticwebassets\\images\\0b58cf23-b6ab-4d92-a945-8752aaccd10e_text2.png"
     },
     {
       "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\1ffa1a7c-8071-4ca7-b1f9-b4b9d1e44153_text2.png",
@@ -35,6 +43,86 @@
     {
       "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\9f4ee065-0453-42c7-8acd-58c970ad0be2_text2.png",
       "PackagePath": "staticwebassets\\images\\9f4ee065-0453-42c7-8acd-58c970ad0be2_text2.png"
+    },
+    {
+      "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\drivers\\alexAlbon.png",
+      "PackagePath": "staticwebassets\\images\\drivers\\alexAlbon.png"
+    },
+    {
+      "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\drivers\\carlosSainz.png",
+      "PackagePath": "staticwebassets\\images\\drivers\\carlosSainz.png"
+    },
+    {
+      "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\drivers\\charlesLeclerc.png",
+      "PackagePath": "staticwebassets\\images\\drivers\\charlesLeclerc.png"
+    },
+    {
+      "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\drivers\\estebanOcon.png",
+      "PackagePath": "staticwebassets\\images\\drivers\\estebanOcon.png"
+    },
+    {
+      "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\drivers\\fernandoAlonso.png",
+      "PackagePath": "staticwebassets\\images\\drivers\\fernandoAlonso.png"
+    },
+    {
+      "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\drivers\\francoColapinto.png",
+      "PackagePath": "staticwebassets\\images\\drivers\\francoColapinto.png"
+    },
+    {
+      "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\drivers\\georgeRussell.png",
+      "PackagePath": "staticwebassets\\images\\drivers\\georgeRussell.png"
+    },
+    {
+      "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\drivers\\kevinMagnussen.png",
+      "PackagePath": "staticwebassets\\images\\drivers\\kevinMagnussen.png"
+    },
+    {
+      "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\drivers\\lanceStroll.png",
+      "PackagePath": "staticwebassets\\images\\drivers\\lanceStroll.png"
+    },
+    {
+      "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\drivers\\landoNorris.png",
+      "PackagePath": "staticwebassets\\images\\drivers\\landoNorris.png"
+    },
+    {
+      "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\drivers\\lewisHamilton.png",
+      "PackagePath": "staticwebassets\\images\\drivers\\lewisHamilton.png"
+    },
+    {
+      "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\drivers\\liamLawson.png",
+      "PackagePath": "staticwebassets\\images\\drivers\\liamLawson.png"
+    },
+    {
+      "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\drivers\\maxVerstappen.png",
+      "PackagePath": "staticwebassets\\images\\drivers\\maxVerstappen.png"
+    },
+    {
+      "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\drivers\\nicoHulkenberg.png",
+      "PackagePath": "staticwebassets\\images\\drivers\\nicoHulkenberg.png"
+    },
+    {
+      "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\drivers\\oscarPiastri.png",
+      "PackagePath": "staticwebassets\\images\\drivers\\oscarPiastri.png"
+    },
+    {
+      "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\drivers\\pierreGasly.png",
+      "PackagePath": "staticwebassets\\images\\drivers\\pierreGasly.png"
+    },
+    {
+      "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\drivers\\sergioPerez.png",
+      "PackagePath": "staticwebassets\\images\\drivers\\sergioPerez.png"
+    },
+    {
+      "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\drivers\\valtteriBottas.png",
+      "PackagePath": "staticwebassets\\images\\drivers\\valtteriBottas.png"
+    },
+    {
+      "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\drivers\\yukiTsunoda.png",
+      "PackagePath": "staticwebassets\\images\\drivers\\yukiTsunoda.png"
+    },
+    {
+      "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\drivers\\zhouGuanyu.png",
+      "PackagePath": "staticwebassets\\images\\drivers\\zhouGuanyu.png"
     },
     {
       "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\images\\fefb1699-fa70-4b48-9304-5b0293b18f9f_text2.png",

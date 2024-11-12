@@ -1,0 +1,32 @@
+﻿.driver-card {
+    cursor: pointer;
+    width: 150px; /* Fixed width */
+    height: 220px; /* Fixed height */
+    border: 1px solid #ccc;
+    transition: box-shadow 0.3s;
+    overflow: hidden; /* Ensures content doesn't overflow if resized */
+}
+
+    .driver-card.selected {
+        border-color: #007bff;
+        box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+    }
+
+    .driver-card .driver-image {
+        width: 100%;
+        height: 150px; /* Fixed height for image within card */
+        object-fit: cover; /* Ensures image fills the area, maintaining aspect ratio */
+    }
+
+    .driver-card .card-body {
+        padding: 0.5rem;
+        height: 70px; /* Adjusted for consistent space below the image */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .driver-card .card-text {
+        font-size: 0.9rem;
+        margin: 0;
+    }

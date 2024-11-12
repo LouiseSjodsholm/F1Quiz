@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using F1Quiz.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace F1Quiz.Models.ViewModels
 {
@@ -26,5 +27,6 @@ namespace F1Quiz.Models.ViewModels
         public string Text { get; set; }
         public string AnswerType { get; set; } = "text"; //defaults to text unless otherwise specified during creation.
         public string? Options { get; set; } //Multiple choice options
+        public List<DriverOption>? DriverOptions { get; set; }
     }
 }
