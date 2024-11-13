@@ -1,6 +1,6 @@
 # Formula 1 Quiz Application
 
-A web application to host and participate in Formula 1 quizzes, with features for creating events, answering questions, and viewing leaderboards. Built with .NET and ASP.NET Core, this application allows admins to create quiz events and track participant scores, while users can answer questions and view their scores across multiple events. Designed for friends and family, this project demonstrates full-stack development with .NET and serves as a personal project for managing a Formula 1 quiz.
+The project is a prototype of a web application to host and participate in Formula 1 quizzes, with features for creating events, answering questions, and viewing leaderboards. Built with .NET and ASP.NET Core, this application allows admins to create quiz events and track participant scores, while users can answer questions and view their scores across multiple events. Designed for friends and family, this project demonstrates full-stack development with .NET and serves as a personal project for managing a Formula 1 quiz.
 
 ## Table of Contents
 - [Features](#features)
@@ -60,7 +60,7 @@ A web application to host and participate in Formula 1 quizzes, with features fo
 - View leaderboards for each event and cumulative scores across all events.
 
 ### Participant Functions
-- Register an account an log in.
+- Register an account and log in.
 - Answer questions for active events.
 - View scores in the Event Leaderboard and Total Leaderboard section.
 
