@@ -1,0 +1,75 @@
+﻿@using F1Quiz.Models.ViewModels
+@model EventWithQuestionsViewModel
+
+<h2>Edit Event - Add Correct Answers</h2>
+
+<form asp-action="EditEvent" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="EventId" />
+
+    <!-- Display Only: Event Name Field -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Event Name</label>
+        <input asp-for="Name" class="form-control" readonly />
+    </div>
+
+    <!-- Display Only: Event DateTime Field -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Event Date and Time</label>
+        <input asp-for="DateTime" type="datetime-local" class="form-control" readonly />
+    </div>
+
+    <!-- Display Only: Event Description Field -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Description</label>
+        <textarea asp-for="Description" class="form-control" rows="3" readonly></textarea>
+    </div>
+
+    <!-- Display Only: Event Image Field -->
+    <div class="mb-3">
+        @if (!string.IsNullOrEmpty(Model.ImagePath))
+        {
+            <img src="~/@Model.ImagePath" alt="Event Image" class="img-thumbnail mb-3" />
+        }
+    </div>
+
+    <!-- Questions Section with Correct Answer Input -->
+    <h4>Questions and Correct Answers</h4>
+    @for (var i = 0; i < Model.Questions.Count; i++)
+    {
+        <input type="hidden" asp-for="@Model.Questions[i].QuestionId" />
+        <input type="hidden" asp-for="@Model.Questions[i].Text" />
+        <div class="mb-3 border p-3 rounded">
+            <!-- Display Only: Question Text -->
+            <label class="form-label fw-bold">Question @(i + 1)</label>
+            <input type="text" class="form-control" value="@Model.Questions[i].Text" readonly />
+
+            <!-- Display Only: Answer Type -->
+            <label class="form-label fw-bold mt-2">Answer Type</label>
+            <input type="text" class="form-control" value="@Model.Questions[i].AnswerType" readonly />
+
+            <!-- Display Only: Options Field (if MCQ) -->
+            @if (Model.Questions[i].AnswerType == "mcq" && !string.IsNullOrEmpty(Model.Questions[i].Options))
+            {
+                <label class="form-label fw-bold mt-2">Options</label>
+                <input type="text" class="form-control" value="@Model.Questions[i].Options" readonly />
+            }
+
+            <!-- Display Only: Driver Options (if allDriver) -->
+            @if (Model.Questions[i].AnswerType == "allDriver" && Model.Questions[i].DriverOptions != null)
+            {
+                <label class="form-label fw-bold mt-2">Driver Options</label>
+                <p class="small text-muted">This question uses predefined driver options.</p>
+            }
+
+            <!-- Editable: Correct Answer Field -->
+            <div class="mt-2">
+                <label asp-for="Questions[i].CorrectAnswer" class="form-label fw-bold">Correct Answer</label>
+                <input asp-for="Questions[i].CorrectAnswer" class="form-control" placeholder="Enter the correct answer" />
+                <span asp-validation-for="Questions[i].CorrectAnswer" class="text-danger"></span>
+            </div>
+        </div>
+    }
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-success mt-3">Save Correct Answers</button>
+</form>

@@ -41,12 +41,13 @@ namespace F1Quiz.Repositories
 
         public async Task<IEnumerable<Event>> GetAllEventsAsync()
         {
-            return await _context.Events.ToListAsync();
+            return await _context.Events.Include(e=>e.Questions).ToListAsync();
         }
 
         public async Task<Event?> GetEventByIdAsync(int id)
         {
-            return await _context.Events.FindAsync(id); //return null if no matches
+            return await _context.Events.Include(e => e.Questions)
+                .FirstOrDefaultAsync(e => e.Id == id);
         }
 
         public async Task<Event?> GetUpcomingEventAsync(DateTime currentDateTime)
@@ -58,10 +59,11 @@ namespace F1Quiz.Repositories
                 .FirstOrDefaultAsync();
         }
 
-        public async Task UpdateEventAsync(Event race)
+        public async Task<bool> UpdateEventAsync(Event race)
         {
             _context.Entry(race).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            int changedRows = await _context.SaveChangesAsync();
+            return changedRows > 0;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace F1Quiz.Repositories
         Task<IEnumerable<Event>> GetAllEventsAsync();
         Task<Event?> GetEventByIdAsync(int id);
         Task<bool> AddEventAsync(Event race);
-        Task UpdateEventAsync(Event race);
+        Task<bool> UpdateEventAsync(Event race);
         Task DeleteEventAsync(int id);
     }
 }

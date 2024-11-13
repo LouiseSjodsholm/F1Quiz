@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using F1Quiz.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace F1Quiz.Data
 {
-    public class QuizContext : DbContext
+    public class QuizContext : IdentityDbContext
     {
         public DbSet<Event> Events { get; set; }
         public DbSet<Question> Questions { get; set; }
