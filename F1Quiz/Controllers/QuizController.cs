@@ -2,18 +2,25 @@
 using F1Quiz.Models;
 using F1Quiz.Models.ViewModels;
 using F1Quiz.Repositories;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace F1Quiz.Controllers
 {
+    [Authorize] //only logged in users can access functionality
     public class QuizController : Controller
     {
         private readonly IEventRepository _eventRepository;
         private readonly IResponseRepository _responseRepository;
-        public QuizController(IEventRepository eventRepository, IResponseRepository responseRepository)
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IScoreRepository _scoreRepository;
+        public QuizController(IEventRepository eventRepository, IResponseRepository responseRepository, UserManager<IdentityUser> userManager, IScoreRepository scoreRepository)
         {
             _eventRepository = eventRepository;
             _responseRepository = responseRepository;
+            _userManager = userManager;
+            _scoreRepository = scoreRepository;
         }
         [HttpGet]
         public async Task<IActionResult> AnswerQuestions()
@@ -56,11 +63,17 @@ namespace F1Quiz.Controllers
                 return View();
             }
 
+            //Current user
+            var userId = _userManager.GetUserId(User);
+            if(userId == null) 
+                return Unauthorized();
+
 
             var responseList = responses.Questions.Select(r => new Response
             {
                 QuestionId = r.QuestionId,
-                Answer = r.Response //Remember to add which user
+                Answer = r.Response,
+                UserId = Guid.Parse(userId)
             }).ToList();
             bool isSaved = await _responseRepository.AddResponseAsync(responseList);
             if (isSaved)
@@ -68,6 +81,28 @@ namespace F1Quiz.Controllers
             else
                 ViewData["ErrorMessage"] = "Der var et problem med at gemme dit svar, prøv igen.";
             return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> LatestEventLeaderboard()
+        {
+            try
+            {
+                var eventleaderborad = await _scoreRepository.GetLatestEventLeaderboardAsync();
+                return View(eventleaderborad);
+            }
+            catch (InvalidOperationException ex)
+            {
+                ViewData["ErrorMessage"] = ex.Message;
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> TotalLeaderboard()
+        {
+            var leaderboard = await _scoreRepository.GetTotalLeaderboardAsync();
+            return View(leaderboard);
         }
     }
 }

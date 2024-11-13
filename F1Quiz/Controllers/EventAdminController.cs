@@ -2,6 +2,7 @@
 using F1Quiz.Models;
 using F1Quiz.Models.ViewModels;
 using F1Quiz.Repositories;
+using F1Quiz.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -14,11 +15,13 @@ namespace F1Quiz.Controllers
     {
         private readonly IQuestionRepository _questionRepository;
         private readonly IEventRepository _eventRepository;
+        private readonly ScoreCalculation _scoreCalculation;
 
-        public EventAdminController(IQuestionRepository questionRepository, IEventRepository eventRepository)
+        public EventAdminController(IQuestionRepository questionRepository, IEventRepository eventRepository, ScoreCalculation scoreCalculation)
         {
             _questionRepository = questionRepository;
             _eventRepository = eventRepository;
+            _scoreCalculation = scoreCalculation;
         }
 
         [HttpGet]
@@ -183,7 +186,19 @@ namespace F1Quiz.Controllers
             // Save changes
             bool isUpdated = await _eventRepository.UpdateEventAsync(existingEventToUpdate);
             if (isUpdated)
+            {
                 ViewData["SuccessMessage"] = "Correct answers updated successfully.";
+                // Automatically calculate and save scores for the event
+                try
+                {
+                    await _scoreCalculation.CalculateAndSaveScoresAsync((int)model.EventId);
+                    TempData["SuccessMessage"] += " Scores calculated and saved.";
+                }
+                catch (Exception ex)
+                {
+                    TempData["ErrorMessage"] = $"Error calculating scores: {ex.Message}";
+                }
+            }  
             else
                 ViewData["ErrorMessage"] = "There was an issue with updating the correct answers, please try again.";
 

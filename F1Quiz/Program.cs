@@ -40,6 +40,8 @@ builder.Services.AddDbContext<QuizContext>(options =>
 builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<IResponseRepository, ResponseRepository>();
+builder.Services.AddScoped<IScoreRepository, ScoreRepository>();
+builder.Services.AddScoped<ScoreCalculation>();
 
 //Add Identity services
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>

@@ -41,7 +41,7 @@ namespace F1Quiz.Repositories
 
         public async Task<IEnumerable<Event>> GetAllEventsAsync()
         {
-            return await _context.Events.Include(e=>e.Questions).ToListAsync();
+            return await _context.Events.Include(e=>e.Questions).OrderByDescending(e=>e.RaceDateTime).ToListAsync();
         }
 
         public async Task<Event?> GetEventByIdAsync(int id)
