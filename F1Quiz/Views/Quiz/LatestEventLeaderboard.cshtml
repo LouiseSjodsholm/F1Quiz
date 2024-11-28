@@ -13,7 +13,7 @@
 else
 {
     <div class="container mt-4">
-        <h2 class="mb-3">@Model.RaceName - Leaderboard</h2>
+        <h2 class="mb-3">@Model.RaceName - Resultat</h2>
         <p class="text-muted">@Model.RaceDate.ToString("MMMM dd, yyyy")</p>
 
         @if (Model.UserScores.Any())
@@ -21,8 +21,8 @@ else
             <table class="table table-bordered table-hover mt-4">
                 <thead class="table-dark">
                     <tr>
-                        <th scope="col">Rank</th>
-                        <th scope="col">User Name</th>
+                        <th scope="col">Placering</th>
+                        <th scope="col">Bruger</th>
                         <th scope="col">Score</th>
                     </tr>
                 </thead>
@@ -40,7 +40,7 @@ else
         }
         else
         {
-            <p class="text-center text-muted">No scores available for this event yet.</p>
+            <p class="text-center text-muted">Der er ingen resultater tilgængelige for dette løb endnu.</p>
         }
     </div>
 }

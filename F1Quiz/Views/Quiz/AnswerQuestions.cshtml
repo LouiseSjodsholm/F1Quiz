@@ -29,7 +29,7 @@ else
 
     @if (Model.RaceDateTime > DateTime.Now)
     {
-        <h3>Answer the Questions</h3>
+        <h3>Svar på spørgsmålene</h3>
         <form asp-action="AnswerQuestions" method="post">
             <input type="hidden" asp-for="EventId" /> <!-- Ensure EventId binds correctly -->
             @for (var i = 0; i < Model.Questions.Count; i++)
@@ -81,7 +81,7 @@ else
                 </div>
             }
 
-            <button type="submit" class="btn btn-primary">Submit Answers</button>
+            <button type="submit" class="btn btn-primary">Indsend svar</button>
         </form>
     }
 }

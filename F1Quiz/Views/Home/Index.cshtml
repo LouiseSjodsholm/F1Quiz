@@ -3,6 +3,32 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Velkommen til F1 Quizzen!</h1>
+    <p>For at deltage i quizzen skal du oprette en bruger og logge ind.</p>
+    <p>
+        Når du er logget ind, kan du svare på spørgsmålene og konkurrere om at ligge øverst på resultattavlen.
+    </p>
+    <p>
+        Deltag i quizzerne til hvert løb så snart de er klar og kom tilbage efter løbet for at tjekke hvor godt du klarede dig.
+    </p>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>
+            Klar til at gå i gang? <a class="btn btn-primary" asp-controller="Quiz" asp-action="AnswerQuestions">Tag quizzen</a>
+        </p>
+        <p>
+            Se, hvordan du klarede dig sidste gang på <a asp-controller="Quiz" asp-action="LatestEventLeaderboard">Løbs resultat</a>
+            eller find din samlede placering på <a asp-controller="Quiz" asp-action="TotalLeaderboard">Samlet resultat</a>.
+        </p>
+    }
+    else
+    {
+        <p>For at deltage i quizzen skal du:</p>
+        <div class="d-flex flex-column align-items-center">
+            <a class="btn btn-primary mb-2" asp-area="Identity" asp-page="/Account/Register">Opret en bruger</a>
+            <span>eller hvis du allerede har en</span>
+            <a class="btn btn-primary mt-2" asp-area="Identity" asp-page="/Account/Login">Log ind</a>
+        </div>
+    }
 </div>
+

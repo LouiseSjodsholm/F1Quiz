@@ -434,3 +434,11 @@ C:\Users\louis\source\repos\F1Quiz\F1Quiz\obj\Debug\net8.0\refint\F1Quiz.dll
 C:\Users\louis\source\repos\F1Quiz\F1Quiz\obj\Debug\net8.0\F1Quiz.pdb
 C:\Users\louis\source\repos\F1Quiz\F1Quiz\obj\Debug\net8.0\F1Quiz.genruntimeconfig.cache
 C:\Users\louis\source\repos\F1Quiz\F1Quiz\obj\Debug\net8.0\ref\F1Quiz.dll
+C:\Users\louis\source\repos\F1Quiz\F1Quiz\bin\Debug\net8.0\F1Quiz.staticwebassets.endpoints.json
+C:\Users\louis\source\repos\F1Quiz\F1Quiz\bin\Debug\net8.0\System.IO.Pipelines.dll
+C:\Users\louis\source\repos\F1Quiz\F1Quiz\bin\Debug\net8.0\System.Text.Encodings.Web.dll
+C:\Users\louis\source\repos\F1Quiz\F1Quiz\bin\Debug\net8.0\System.Text.Json.dll
+C:\Users\louis\source\repos\F1Quiz\F1Quiz\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+C:\Users\louis\source\repos\F1Quiz\F1Quiz\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\louis\source\repos\F1Quiz\F1Quiz\obj\Debug\net8.0\staticwebassets\msbuild.F1Quiz.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\louis\source\repos\F1Quiz\F1Quiz\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

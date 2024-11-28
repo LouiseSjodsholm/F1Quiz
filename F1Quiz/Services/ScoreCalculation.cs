@@ -40,7 +40,7 @@ namespace F1Quiz.Services
                     var correctAnswer = eventDetails.Questions
                         .FirstOrDefault(q => q.Id == response.QuestionId)?.CorrectAnswer;
 
-                    if (correctAnswer != null && response.Answer == correctAnswer)
+                    if (response.Answer == correctAnswer)
                     {
                         correctAnswersCount++;
                     }

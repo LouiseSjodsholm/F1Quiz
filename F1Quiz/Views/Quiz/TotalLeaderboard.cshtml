@@ -1,17 +1,17 @@
 ﻿@model F1Quiz.Models.ViewModels.TotalLeaderboardViewModel
 
 <div class="container mt-4">
-    <h2 class="mb-3">Total Leaderboard</h2>
-    <p class="text-muted">Cumulative scores for all events</p>
+    <h2 class="mb-3">Samlet resultat</h2>
+    <p class="text-muted">Kumulative resultater for alle løb</p>
 
     @if (Model.UserScores.Any())
     {
         <table class="table table-bordered table-hover mt-4">
             <thead class="table-dark">
                 <tr>
-                    <th scope="col">Rank</th>
-                    <th scope="col">User Name</th>
-                    <th scope="col">Total Score</th>
+                    <th scope="col">Placering</th>
+                    <th scope="col">Bruger</th>
+                    <th scope="col">Samlet Score</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +28,6 @@
     }
     else
     {
-        <p class="text-center text-muted">No scores available yet.</p>
+        <p class="text-center text-muted">Ingen scorer tilgængelige endnu.</p>
     }
 </div>

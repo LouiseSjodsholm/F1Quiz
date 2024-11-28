@@ -2,7 +2,7 @@
   "Files": [
     {
       "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\F1Quiz.bundle.scp.css",
-      "PackagePath": "staticwebassets\\F1Quiz.bundle.scp.css"
+      "PackagePath": "staticwebassets\\F1Quiz.nv417nqd76.bundle.scp.css"
     },
     {
       "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\css\\custom-css.css",
@@ -371,6 +371,10 @@
     {
       "Id": "C:\\Users\\louis\\source\\repos\\F1Quiz\\F1Quiz\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.F1Quiz.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.F1Quiz.Microsoft.AspNetCore.StaticWebAssets.props",
